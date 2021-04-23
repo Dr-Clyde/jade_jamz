@@ -1,0 +1,57 @@
+//Resources
+// Simple MIDI Part 3    https://www.youtube.com/watch?v=nh7J71ItDn8
+// Send and Recieve MIDI https://www.instructables.com/Send-and-Receive-MIDI-with-Arduino/
+// MIDI Parameters Explained https://www.instructables.com/What-is-MIDI/
+// Digital Pin1 is Reserved for the serial transmit which when wired to the adapter will push the midi
+// when the function MIDImessage() is called in the loop() of the arduino sketch, it sends the three bytes:
+// Serial.write(command);
+// Serial.write(MIDInote);
+// Serial.write(MIDIvelocity);
+// if the "command" in the MIDImessage() function is noteON then the note will start, if it is noteOFF the note will stop.
+
+//Example Code:
+/*
+
+int velocity = 100;//velocity of MIDI notes, must be between 0 and 127
+//higher velocity usually makes MIDI instruments louder
+ 
+int noteON = 144;//144 = 10010000 in binary, note on command
+int noteOFF = 128;//128 = 10000000 in binary, note off command
+
+void setup() {
+  //  Set MIDI baud rate:
+  Serial.begin(31250);
+}
+
+void loop() {
+  for (int note=50;note<70;note++) {//from note 50 (D3) to note 69 (A4)
+    MIDImessage(noteON, note, velocity);//turn note on
+    delay(300);//hold note for 300ms
+    MIDImessage(noteOFF, note, velocity);//turn note off
+    delay(200);//wait 200ms until triggering next note
+  }
+}
+
+//send MIDI message
+void MIDImessage(int command, int MIDInote, int MIDIvelocity) {
+  Serial.write(command);//send note on or note off command 
+  Serial.write(MIDInote);//send pitch data
+  Serial.write(MIDIvelocity);//send velocity data
+}
+*/
+
+/* //Note Value Arrays from Octave 0 to 9, This makes it easy to select note values
+  // For example to play C5 you would do MIDImessage(noteON, c[9], velocity
+int c[] = {12, 24, 36, 48, 60, 72, 84, 96, 108, 120}
+int db[] = {13, 25, 37, 49, 61, 73, 85, 97, 109, 121}
+int d[] = {14, 26, 38, 50, 62, 74, 86, 98, 110, 122}
+int eb[] = {15, 27, 39, 51, 63, 75, 87, 99, 111, 123}
+int e[] = {16, 28, 40, 52, 64, 76, 88, 100, 112, 124}
+int f[] = {17, 29, 41, 53, 65, 77, 89, 101, 113, 125}
+int gb[] = {18, 30, 42, 54, 66, 78, 90, 102, 114, 126}
+int g[] = {19, 31, 43, 55, 67, 79, 91, 103, 115, 127}
+int ab[] = {20, 32, 44, 56, 68, 80, 92, 104, 116, 8}
+int a[] = {21, 33, 45, 57, 69, 81, 93, 105, 117, 9}
+int bb[] = {22, 34, 46, 58, 70, 82, 94, 106, 118, 10}
+int b[] = {23, 35, 47, 69, 71, 83, 95, 107, 119, 11}
+*/
